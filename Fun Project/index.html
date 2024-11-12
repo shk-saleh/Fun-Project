@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Just for Fun</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      margin: 0;
+      background-color: #303030;
+      overflow: hidden;
+      transform: all 0.3s;
+      font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    #bulbs{
+      position: absolute;
+      top: -200px;
+    }
+    
+    .move-down{
+      top: 0;
+      transition: top 0.5s;
+    }
+
+    .birthday-card {
+      position: relative;
+      background-color: white;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      overflow: hidden;
+      transition: all .3s ;
+    }
+
+    .dark{
+      transition: all .3s ;
+      background-color: rgb(143, 143, 143);
+    }
+
+    .birthday-card h1 {
+      font-size: 36px;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .birthday-card p {
+      font-size: 18px;
+      color: #666;
+    }
+
+    .balloon {
+      position: absolute;
+      width: 100px;
+      height: 300px;
+      background-image: url('./ballons.png'); /* Replace with your actual balloon PNG */
+      background-size: contain;
+      background-repeat: no-repeat;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0);
+      }
+      100% {
+        transform: translateY(-100%);
+      }
+    }
+
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: #ff69b4;
+      animation: confetti 3s ease-in-out infinite;
+    }
+
+    @keyframes confetti {
+      0% {
+        transform: translateY(0) rotate(0deg);
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+      }
+    }
+
+    .birthday-card button {
+      margin-top: 30px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <img src="bulb hanging.png" id="bulbs" alt="bulbs" width="300px">
+
+  <div class="birthday-card">
+
+    <h1><b>Let's have Fun!</b><h1> 
+    <button id="activateEffect">Click here!!</button>
+
+  </div>
+
+  <audio id="birthdaySong">
+    <source src="song-2.mp3" type="audio/mp3">
+  </audio>
+
+  <script>
+
+
+    const birthdayCard = document.querySelector('.birthday-card');
+    const button = document.getElementById('activateEffect');
+    const birthdaySong = document.getElementById('birthdaySong');
+    const lamp = document.getElementById('bulbs');
+
+    button.addEventListener('click', () => {
+      // Create and append balloons
+      for (let i = 0; i < 10; i++) {
+        const balloon = document.createElement('div');
+        balloon.classList.add('balloon');
+        balloon.style.left = `${Math.random() * 100}%`;
+        balloon.style.animationDelay = `${Math.random() * 1}s`;
+        birthdayCard.appendChild(balloon);
+      }
+
+      // Create and append confetti
+      for (let i = 0; i < 50; i++) {
+        const confetti = document.createElement('div');
+        confetti.classList.add('confetti');
+        confetti.style.left = `${Math.random() * 100}%`;
+        confetti.style.animationDelay = `${Math.random() * 1}s`;
+        birthdayCard.appendChild(confetti);
+      }
+
+      // Add the 'happy birthday' text
+      const happyBirthdayText = document.createElement('h1');
+      happyBirthdayText.textContent = 'Happy Birthday Abdullah!';
+      happyBirthdayText.style.color = 'white';
+      happyBirthdayText.style.animation = 'fade-in 2s ease-in-out';
+      birthdayCard.appendChild(happyBirthdayText);
+
+      // Add the tagline
+      const tagline = document.createElement('p');
+      tagline.textContent = 'May Allah give you every happiness and blessing.';
+      tagline.style.color = 'white';
+      tagline.style.opacity = '1';
+      tagline.style.animationFillMode = 'forwards';
+      birthdayCard.appendChild(tagline);
+
+      birthdaySong.play();
+      birthdayCard.classList.add("dark");
+      lamp.style.top = '0'; 
+      lamp.style.transition = 'top 0.5s'; 
+
+
+      // Disable the button after click
+      button.disabled = true;
+    });
+
+
+
+
+  </script>
+</body>
+</html>
